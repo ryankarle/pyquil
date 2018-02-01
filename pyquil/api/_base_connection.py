@@ -92,10 +92,10 @@ def parse_error(res):
     try:
         body = res.json()
     except JSONDecodeError:
-        raise UnknownApiError(res.text)
+        raise UnknownApiError("Remote server returned an unparseable error.")
 
     if 'error_type' not in body:
-        raise UnknownApiError(body)
+        raise UnknownApiError("Remote server returned an error without error_type.")
 
     error_type = body['error_type']
     status = body['status']
